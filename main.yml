@@ -24,6 +24,6 @@
         name: "{{ configs_item }}"
       loop_control:
         loop_var: configs_item
-      with_items: "{{ configs_configs }}"
+      with_items: "{{ run_configs }}"
       tags:
         - always
