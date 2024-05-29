@@ -1,0 +1,29 @@
+---
+- name: DotFiles Config
+  hosts: localhost
+  connection: local
+
+  tasks:
+    - name: Set configs
+      ansible.builtin.set_fact:
+        run_configs: "{{ ansible_run_tags != ['all'] and ansible_run_tags or default_configs | difference(exclude_configs | default([])) }}"
+      tags:
+        - always
+
+    - name: Display configs
+      ansible.builtin.debug:
+        var: run_configs
+      tags:
+        - always
+
+    - name: Run configs
+      ansible.builtin.include_config:
+        apply:
+          tags:
+            - "{{ configs_item }}"
+        name: "{{ configs_item }}"
+      loop_control:
+        loop_var: configs_item
+      with_items: "{{ configs_configs }}"
+      tags:
+        - always
