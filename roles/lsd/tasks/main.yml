@@ -7,3 +7,11 @@
 - name: "LSD | Run Tasks: {{ ansible_distribution }}"
   ansible.builtin.include_tasks: "{{ ansible_distribution }}.yml"
   when: lsd_distribution_config.stat.exists
+
+- name: "LSD| Configure LSD"
+  ansible.builtin.copy:
+    src: lsd
+    dest: "{{ ansible_user_dir }}/.config/lsd"
+    mode: "0644"
+    directory_mode: "0755"
+    force: true
