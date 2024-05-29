@@ -123,10 +123,6 @@ function arch_setup() {
     # Sets locale
     _task "Setting Locale"
     _cmd "sudo localectl set-locale LANG=en_US.UTF-8"
-
-    # Loads keymap
-    _task "Loading Keymap"
-    _cmd "loadkeys es"
 }
 
 # Updates ansible galaxy
