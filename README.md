@@ -1,4 +1,6 @@
-{ WORK IN PROGRESS}
+::: warning
+WORK IN PROGRESS
+:::
 
 # Vito Alighieri's dotfiles
 
