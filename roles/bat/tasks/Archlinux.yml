@@ -40,5 +40,4 @@
       community.general.pacman:
         name: bat
         state: present
-        allow_downgrade: true
       become: true
