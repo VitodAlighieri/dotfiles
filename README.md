@@ -10,7 +10,12 @@ This repository contains my personal dotfiles and a completely automated method 
 - Cross-Platform: Designed to work on various UNIX-like systems, ensuring consistency in different environments.
 - Easily Extensible: Modular playbooks allow easy addition and customization of configurations.
 - Version Controlled: All changes are tracked, enabling easy rollback and version management.
+
 ## File structure
+
+One of the objectives of these dotfiles is to make their management as easy as possible. One of the key factors to do so has been the rigorous organization, this being as standard, common and symmetrical as possible, in addition to this documentation.
+
+The system structure is as follows:
 
  - `main.yml`: Entry point of the dotfiles instalation.
 
