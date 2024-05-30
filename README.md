@@ -1,6 +1,7 @@
-::: warning
-WORK IN PROGRESS
-:::
+<dl>
+  <dt>WARNING</dt>
+  <dd>Work in progress</dd>
+</dl>
 
 # Vito Alighieri's dotfiles
 
