@@ -1,0 +1,13 @@
+---
+- name: "Neovim | {{ ansible_distribution }} | Install Neovim"
+  community.general.pacman:
+    name: neovim
+    state: present
+  become: true
+
+- name: "NvChad | Clone Latest Version"
+  ansible.builtin.git:
+    repo: git clone https://github.com/NvChad/NvChad
+    depth: 1
+    dest: "{{ ansible_user_dir }}/.config/nvim"
+  notify: "Install NvChad"
