@@ -1,6 +1,8 @@
+{ WORK IN PROGRESS}
+
 # Vito Alighieri's dotfiles
 
-This repository contains my personal dotfiles and a completely automated method to install and sync them using Ansible. 
+> This repository contains my personal dotfiles and a completely automated method to install and sync them using Ansible. 
 
 
 ## Features
