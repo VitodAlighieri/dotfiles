@@ -1,0 +1,42 @@
+---
+- name: "Waybar | Download Latest Version JSON"
+  ansible.builtin.uri:
+    url: https://api.github.com/repos/Alexays/Waybar/releases/latest
+  register: waybar_latest_version_json
+  changed_when: false
+
+- name: "Waybar | Registering Waybar Latest Release"
+  ansible.builtin.set_fact:
+    waybar_latest_release: "{{ waybar_latest_version_json.json.tag_name }}"
+
+- name: "Waybar | Registering Waybar Latest Version"
+  ansible.builtin.set_fact:
+    waybar_latest_version: "{{ waybar_latest_release.stdout | default('') }}"
+
+- name: "Waybar | Getting version information"
+  ansible.builtin.command:
+    cmd: waybar --version
+  register: current_waybar_version
+  changed_when: false
+  failed_when: false
+
+- name: "Waybar | Edit current_waybar_version"
+  ansible.builtin.set_fact:
+    current_waybar_version: "{{ current_waybar_version.stdout.split(' ')[-1] | default('') }}"
+
+- name: "Waybar | Show current_waybar_version debug"
+  ansible.builtin.debug:
+    var: current_waybar_version
+
+- name: "Waybar | Show waybar_latest_release debug"
+  ansible.builtin.debug:
+    var: waybar_latest_release
+
+- name: "Waybar | Install"
+  when: waybar_latest_release | regex_replace('^.', '') not in current_waybar_version|default('')
+  block:
+    - name: "Waybar | Install Waybar"
+      community.general.pacman:
+        name: waybar
+        state: present
+      become: true
