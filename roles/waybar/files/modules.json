@@ -76,19 +76,19 @@
     //     "tooltip": false
     // },
     
-    // Settings
-    "custom/settings": {
-        "format": "",
-        "on-click": "~/dotfiles/apps/ML4W_Dotfiles_Settings-x86_64.AppImage",
-        "tooltip": false
-    },
+    // // Settings
+    // "custom/settings": {
+    //     "format": "",
+    //     "on-click": "~/dotfiles/apps/ML4W_Dotfiles_Settings-x86_64.AppImage",
+    //     "tooltip": false
+    // },
 
-    // Keybindings
-    "custom/keybindings": {
-        "format": "",
-        "on-click": "~/dotfiles/hypr/scripts/keybindings.sh",
-        "tooltip": false
-    },
+    // // Keybindings
+    // "custom/keybindings": {
+    //     "format": "",
+    //     "on-click": "~/dotfiles/hypr/scripts/keybindings.sh",
+    //     "tooltip": false
+    // },
 
     // Filemanager Launcher
     "custom/filemanager": {
@@ -97,27 +97,27 @@
         "tooltip": false
     },
 
-    // Browser Launcher
-    "custom/browser": {
-        "format": "",
-        "on-click": "~/dotfiles/.settings/browser.sh",
-        "tooltip": false
-    },    
+    // // Browser Launcher
+    // "custom/browser": {
+    //     "format": "",
+    //     "on-click": "~/dotfiles/.settings/browser.sh",
+    //     "tooltip": false
+    // },    
 
-    // ML4W Welcome App
-    "custom/ml4w-welcome": {
-        "on-click": "~/dotfiles/apps/ML4W_Welcome-x86_64.AppImage",
-        "format": " ",
-        "tooltip": false
-    },
+    // // ML4W Welcome App
+    // "custom/ml4w-welcome": {
+    //     "on-click": "~/dotfiles/apps/ML4W_Welcome-x86_64.AppImage",
+    //     "format": " ",
+    //     "tooltip": false
+    // },
 
-    // Wofi Application Launcher
-    "custom/appmenu": {
-        "format": "Apps",
-        "on-click": "wofi --show drun",
-        "on-click-right": "~/dotfiles/hypr/scripts/keybindings.sh",
-        "tooltip": false
-    },
+    // // Wofi Application Launcher
+    // "custom/appmenu": {
+    //     "format": "Apps",
+    //     "on-click": "wofi --show drun",
+    //     "on-click-right": "~/dotfiles/hypr/scripts/keybindings.sh",
+    //     "tooltip": false
+    // },
     
     // Power Menu
     "custom/exit": {
