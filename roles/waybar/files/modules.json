@@ -8,22 +8,22 @@
 // // by Vito Alighieri (2024) 
 // // ----------------------------------------------------- 
 // //
-// {
-//     // Workspaces
-//     "hyprland/workspaces" : {
-//         "on-click": "activate",
-//         "active-only": false,
-//         "all-outputs": true,
-//         "format": "{}",
-//         "format-icons": {
-// 			"urgent": "",
-// 			"active": "",
-// 			"default": ""
-//         },
-//         "persistent-workspaces": {
-//              "*": 5
-//         }       
-//     },
+{
+    // Workspaces
+    "hyprland/workspaces" : {
+        "on-click": "activate",
+        "active-only": false,
+        "all-outputs": true,
+        "format": "{}",
+        "format-icons": {
+    	  	"urgent": "",
+          "active": "",
+          "default": ""
+        },
+        "persistent-workspaces": {
+          "*": 5
+        }       
+    },
 
 //     // Taskbar
 //     "wlr/taskbar": {
@@ -236,20 +236,20 @@
 //     },
 
 //     // Battery
-//     "battery": {
-//         "states": {
-//             // "good": 95,
-//             "warning": 30,
-//             "critical": 15
-//         },
-//         "format": "{icon}   {capacity}%",
-//         "format-charging": "  {capacity}%",
-//         "format-plugged": "  {capacity}%",
-//         "format-alt": "{icon}  {time}",
-//         // "format-good": "", // An empty format will hide the module
-//         // "format-full": "",
-//         "format-icons": [" ", " ", " ", " ", " "]
-//     },
+     "battery": {
+         "states": {
+             // "good": 95,
+             "warning": 30,
+             "critical": 15
+         },
+         "format": "{icon}   {capacity}%",
+         "format-charging": "  {capacity}%",
+         "format-plugged": "  {capacity}%",
+         "format-alt": "{icon}  {time}",
+         // "format-good": "", // An empty format will hide the module
+         // "format-full": "",
+         "format-icons": [" ", " ", " ", " ", " "]
+      },
 
 //     // Pulseaudio
 //     "pulseaudio": {
