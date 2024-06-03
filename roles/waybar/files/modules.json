@@ -33,7 +33,7 @@
         "on-click": "activate",
         "on-click-middle": "close",
         "ignore-list": [
-           "Alacritty"
+           "warp-terminal"
         ],
         "app_ids-mapping": {
             "firefoxdeveloperedition": "firefox-developer-edition"
@@ -56,23 +56,6 @@
         "separate-outputs": true
     },
 
-    // Cliphist
-    "custom/cliphist": {
-        "format": "",
-        "on-click": "sleep 0.1 && ~/dotfiles/scripts/cliphist.sh",
-        "on-click-right": "sleep 0.1 && ~/dotfiles/scripts/cliphist.sh d",
-        "on-click-middle": "sleep 0.1 && ~/dotfiles/scripts/cliphist.sh w",
-        "tooltip": false
-    },
-
-    // Hyprshade
-    "custom/hyprshade": {
-        "format": "",
-        "on-click": "sleep 0.1; ~/dotfiles/hypr/scripts/hyprshade.sh",
-        "on-click-right": "sleep 0.1; ~/dotfiles/hypr/scripts/hyprshade.sh rofi",
-        "tooltip": false
-    },
-
     // Hypridle inhibitor
     "custom/hypridle": {
         "format": "",
@@ -80,43 +63,18 @@
         "escape": true,
         "exec-on-event": true,
         "interval": 60,
-        "exec": "~/dotfiles/hypr/scripts/hypridle.sh status",
-        "on-click": "~/dotfiles/hypr/scripts/hypridle.sh toggle",
+        "exec": "~/.dotfiles/roles/hypr/files/scripts/hypridle.sh status",
+        "on-click": "~/.dotfiles/roles/hypr/files/scripts/hypridle.sh toggle",
         "on-click-right": "hyprlock"
     },
-
-    // Updates Count
-    "custom/updates": {
-        "format": "   {}",
-        "tooltip-format": "{}",
-        "escape": true,
-        "return-type": "json",       
-        "exec": "~/dotfiles/scripts/updates.sh",
-        "restart-interval": 60,
-        "on-click": "alacritty -e ~/dotfiles/scripts/installupdates.sh",
-        "tooltip": false
-    },
-
-    // Theme Starter Label
-    "custom/starter": {
-        "format": "THEME STARTER",
-        "tooltip": false
-    },
     
-    // Wallpaper
-    "custom/wallpaper": {
-        "format": "",
-        "on-click": "~/dotfiles/hypr/scripts/wallpaper.sh select",
-        "on-click-right": "~/dotfiles/hypr/scripts/wallpaper-effects.sh",
-        "tooltip": false
-    },
-
-    // Waybar Themes
-    "custom/waybarthemes": {
-        "format": "",
-        "on-click": "~/dotfiles/waybar/themeswitcher.sh",
-        "tooltip": false
-    },
+    // // Wallpaper
+    // "custom/wallpaper": {
+    //     "format": "",
+    //     "on-click": "~/dotfiles/hypr/scripts/wallpaper.sh select",
+    //     "on-click-right": "~/dotfiles/hypr/scripts/wallpaper-effects.sh",
+    //     "tooltip": false
+    // },
     
     // Settings
     "custom/settings": {
@@ -135,7 +93,7 @@
     // Filemanager Launcher
     "custom/filemanager": {
         "format": "",
-        "on-click": "thunar",
+        "on-click": "nautilus",
         "tooltip": false
     },
 
@@ -153,17 +111,10 @@
         "tooltip": false
     },
 
-    // ChatGPT Launcher
-    "custom/chatgpt": {
-        "format": "",
-        "on-click": "chromium --app=https://chat.openai.com",
-        "tooltip": false
-    },
-
-    // Rofi Application Launcher
+    // Wofi Application Launcher
     "custom/appmenu": {
         "format": "Apps",
-        "on-click": "rofi -show drun -replace",
+        "on-click": "wofi --show drun",
         "on-click-right": "~/dotfiles/hypr/scripts/keybindings.sh",
         "tooltip": false
     },
@@ -205,25 +156,25 @@
         "tooltip": false
     },
 
-    // CPU
-    "cpu": {
-        "format": "/ C {usage}% ",
-        "on-click": "alacritty -e htop"
-    },
+    // // CPU
+    // "cpu": {
+    //     "format": "/ C {usage}% ",
+    //     "on-click": "alacritty -e htop"
+    // },
 
-    // Memory
-    "memory": {
-        "format": "/ M {}% ",
-        "on-click": "alacritty -e htop"
-    },
+    // // Memory
+    // "memory": {
+    //     "format": "/ M {}% ",
+    //     "on-click": "alacritty -e htop"
+    // },
 
-    // Harddisc space used
-    "disk": {
-        "interval": 30,
-        "format": "D {percentage_used}% ",
-        "path": "/",
-        "on-click": "alacritty -e htop"
-    }, 
+    // // Harddisc space used
+    // "disk": {
+    //     "interval": 30,
+    //     "format": "D {percentage_used}% ",
+    //     "path": "/",
+    //     "on-click": "alacritty -e htop"
+    // }, 
 
     "hyprland/language": {
         "format": "/ K {short}"
