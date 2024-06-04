@@ -1,8 +1,6 @@
-# README.md
+# Dotfiles de neovim
 
-# Configuración de Neovim con NvChad
-
-Esta carpeta contiene los ficheros de configuración necesarios para personalizar y extender Neovim usando NvChad. A continuación se describe la estructura y función de cada archivo y carpeta.
+Esta carpeta contiene los ficheros de configuración necesarios para la configuración y personalización de Neovim usando NvChad. Veamos la estructura de archivos y qué continene cada uno de ellos.
 
 ## Estructura de la Carpeta
 
@@ -19,7 +17,7 @@ Esta carpeta contiene los ficheros de configuración necesarios para personaliza
 
 ### `plugins.lua`
 
-Este archivo se encarga de gestionar los plugins utilizados en Neovim. A continuación se listan los plugins configurados:
+Este archivo se encarga de gestionar los plugins utilizados en Neovim. Veamos algunos de los plugins configurados:
 
 - **`jose-elias-alvarez/null-ls.nvim`**: Proporciona formateo y linting. Se carga después de `nvim-lspconfig` y utiliza la configuración definida en `custom.configs.null-ls`.
 - **`Pocco81/AutoSave.nvim`**: Habilita el autoguardado de archivos. No es cargado de forma perezosa y utiliza la configuración en `custom.configs.autosave`.
@@ -61,22 +59,14 @@ Contiene configuraciones específicas para varios plugins:
 
 ## Instrucciones de Instalación
 
-1. Clona el repositorio de NvChad si aún no lo has hecho:
+1. La tarea de ansible se encarga de instalar Neovim y NvChad. Si se quiere hacer de forma manual, se puede hacer:
     ```sh
     git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
     ```
 
-2. Clona o copia esta carpeta de configuración dentro del directorio `custom` en la carpeta de configuración de NvChad:
+2. Ansible se encarga de añadir los archivos necesarios a las carpetas apropiadas, pero si se quiere hacer de forma manual, hay que clonar o copiar esta carpeta de configuración dentro del directorio `custom` en la carpeta de configuración de NvChad:
     ```sh
     cp -r /ruta/a/tu/carpeta/configuracion ~/.config/nvim/lua/custom
     ```
 
-3. Inicia Neovim y los plugins especificados se instalarán automáticamente.
-
-## Contribuciones
-
-Las contribuciones son bienvenidas. Si deseas agregar o modificar la configuración, por favor asegúrate de que los cambios sean compatibles y estén documentados apropiadamente.
-
----
-
-Esta es una configuración inicial que puede ser extendida según tus necesidades. Para más detalles sobre la configuración de NvChad, consulta la [documentación oficial de NvChad](https://nvchad.com/docs/quickstart/install).
+3. Posteriormente se inicia Neovim y los plugins especificados se instalarán automáticamente con LazyVim.
