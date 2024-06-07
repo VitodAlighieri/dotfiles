@@ -1,6 +1,42 @@
 ---
-- name: "Neovim | {{ ansible_distribution }} | Install Neovim"
-  community.general.pacman:
-    name: neovim
-    state: present
-  become: true
+- name: "Neovim | Download Latest Version JSON"
+  ansible.builtin.uri:
+    url: https://api.github.com/repos/neovim/neovim/releases/latest
+  register: neovim_latest_version_json
+  changed_when: false
+
+- name: "Neovim | Registering Neovim Latest Release"
+  ansible.builtin.set_fact:
+    neovim_latest_release: "{{ neovim_latest_version_json.json.tag_name }}"
+
+- name: "Neovim | Registering Neovim Latest Version"
+  ansible.builtin.set_fact:
+    neovim_latest_version: "{{ neovim_latest_release.stdout | default('') }}"
+
+- name: "Neovim | Getting version information"
+  ansible.builtin.command:
+    cmd: nvim --version
+  register: current_neovim_version
+  changed_when: false
+  failed_when: false
+
+- name: "Neovim | Edit current_neovim_version"
+  ansible.builtin.set_fact:
+    current_neovim_version: "{{ current_neovim_version.stdout.split(' ')[-1] | default('') }}"
+
+- name: "Neovim | Show current_neovim_version debug"
+  ansible.builtin.debug:
+    var: current_neovim_version
+
+- name: "Neovim | Show neovim_latest_release debug"
+  ansible.builtin.debug:
+    var: neovim_latest_release
+
+- name: "Neovim | Install"
+  when: neovim_latest_release | regex_replace('^.', '') not in current_neovim_version|default('')
+  block:
+    - name: "Neovim | Install Neovim"
+      community.general.pacman:
+        name: neovim
+        state: present
+      become: true

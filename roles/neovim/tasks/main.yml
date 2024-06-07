@@ -4,11 +4,11 @@
     path: "{{ role_path }}/tasks/{{ ansible_distribution }}.yml"
   register: neovim_distribution_config
 
-- name: "Neovim | Run Tasks: {{ ansible_distribution }}"
+- name: "Neovim | Run {{ ansible_distribution }} Tasks"
   ansible.builtin.include_tasks: "{{ ansible_distribution }}.yml"
   when: neovim_distribution_config.stat.exists
 
-- name: "Neovim | Config folder"
+- name: "Neovim | Configure folder"
   ansible.builtin.file:
     mode: "0755"
     path: "{{ ansible_user_dir }}/.config/nvim"
