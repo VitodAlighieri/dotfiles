@@ -1,0 +1,42 @@
+---
+- name: "Hyprpaper | Download Latest Version JSON"
+  ansible.builtin.uri:
+    url: https://api.github.com/repos/hyprwm/hyprpaper/releases/latest
+  register: hyprpaper_latest_version_json
+  changed_when: false
+
+- name: "Hyprpaper | Registering Hyprpaper Latest Release"
+  ansible.builtin.set_fact:
+    hyprpaper_latest_release: "{{ hyprpaper_latest_version_json.json.tag_name }}"
+
+- name: "Hyprpaper | Registering Hyprpaper Latest Version"
+  ansible.builtin.set_fact:
+    hyprpaper_latest_version: "{{ hyprpaper_latest_release.stdout | default('') }}"
+
+- name: "Hyprpaper | Getting version information"
+  ansible.builtin.command:
+    cmd: hyprpaper --version
+  register: current_hyprpaper_version
+  changed_when: false
+  failed_when: false
+
+- name: "Hyprpaper | Edit current_hyprpaper_version"
+  ansible.builtin.set_fact:
+    current_hyprpaper_version: "{{ current_hyprpaper_version.stdout.split(' ')[-1] | default('') }}"
+
+- name: "Hyprpaper | Show current_hyprpaper_version debug"
+  ansible.builtin.debug:
+    var: current_hyprpaper_version
+
+- name: "Hyprpaper | Show hyprpaper_latest_release debug"
+  ansible.builtin.debug:
+    var: hyprpaper_latest_release
+
+- name: "Hyprpaper | Install"
+  when: hyprpaper_latest_release | regex_replace('^.', '') not in current_hyprpaper_version|default('')
+  block:
+    - name: "Hyprpaper | Install Hyprpaper"
+      community.general.pacman:
+        name: hyprpaper
+        state: present
+      become: true
