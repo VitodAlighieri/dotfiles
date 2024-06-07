@@ -12,96 +12,19 @@ local conditions = {
     end
 }
 
-local function cond_disable_by_ft()
-    local not_empty = conditions.buffer_not_empty()
-    local filetype = vim.api.nvim_buf_get_option(0, "filetype")
-
-    local filetype_to_ignore = {"terminal", "help", "alpha", "dashboard", "neo-tree", "Trouble", "trouble", "lazy",
-                                "mason", "notify", "toggleterm", "dapui_stacks", "toggleterm", "lazyterm", "fzf"}
-
-    if vim.tbl_contains(filetype_to_ignore, filetype) then
-        return false
-    end
-
-    return not_empty
-end
-
 return {
     "nvim-lualine/lualine.nvim",
     dependency = {"nvim-tree/nvim-web-devicons"},
     event = "VeryLazy",
     config = function()
-        local icons = require("config.icons")
-        local colors = require("theme").get_lualine_colors()
 
-        local kirby_default = "(>*-*)>"
-        local mode_kirby = {
-            n = "<(•ᴗ•)>",
-            i = "<(•o•)>",
-            v = "(v•-•)v",
-            [""] = "(v•-•)>",
-            V = "(>•-•)>",
-            c = kirby_default,
-            no = "<(•ᴗ•)>",
-            s = kirby_default,
-            S = kirby_default,
-            [""] = kirby_default,
-            ic = kirby_default,
-            R = kirby_default,
-            Rv = kirby_default,
-            cv = "<(•ᴗ•)>",
-            ce = "<(•ᴗ•)>",
-            r = kirby_default,
-            rm = kirby_default,
-            ["r?"] = kirby_default,
-            ["!"] = "<(•ᴗ•)>",
-            t = "<(•ᴗ•)>"
-        }
-
-        local is_inside_docker = false
-
-        local Job = require("plenary.job")
-        Job:new({
-            command = os.getenv("HOME") .. "/.config/scripts/is_inside_docker.sh",
-            on_stdout = function(_, data)
-                if data == "1" then
-                    is_inside_docker = true
-                end
-            end
-        }):start()
-
-        local default_theme
-
-        if vim.g.neovide then
-            -- default_theme = { fg = colors.surface0, bg = colors.mantle }
-            default_theme = {
-                fg = colors.surface0,
-                bg = colors.mantle
-            }
-        else
-            default_theme = {
-                fg = colors.surface0,
-                bg = "None"
-            }
-        end
-
-        local config = {
+		local config = {
             options = {
                 icons_enabled = true,
                 disabled_filetypes = {"alpha"},
                 globalstatus = true,
                 component_separators = "",
                 section_separators = "",
-                theme = {
-                    normal = {
-                        c = default_theme,
-                        x = default_theme
-                    },
-                    inactive = {
-                        c = default_theme,
-                        x = default_theme
-                    }
-                }
             },
             sections = {
                 lualine_a = {},
