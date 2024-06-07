@@ -4,14 +4,16 @@ Esta carpeta contiene los ficheros de configuración necesarios para la configur
 
 ## Estructura de la Carpeta
 
-- `plugins.lua`
 - `init.lua`
-- `chadrc.lua`
-- `configs/`
-  - `autosave.lua`
-  - `lspconfig.lua`
-  - `mappings.lua`
-  - `null-ls.lua`
+- `lua/`
+  - `plugins/`
+    - `lsp-config.lua`
+    - `neo-tree.lua`
+    - `telescope.lua`
+    - `treesitter.lua`
+    - `null-ls.lua`
+  - `vim-config.lua`
+
 
 ## Descripción de Archivos y Carpetas
 
