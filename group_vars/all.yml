@@ -12,6 +12,7 @@ default_roles:
   # - git
   # - go
   # - helm
+  - hypr
   # - k8s
   # - k9s
   # - lazygit
