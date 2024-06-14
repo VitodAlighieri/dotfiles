@@ -22,7 +22,7 @@
 		"urgent": "󱓻",
 	},
 	"persistent_workspaces": {
-		"*": 5,
+		"*": 4,
 	}
     },
     "memory": {
@@ -68,7 +68,7 @@
     "custom/launcher": {
 	"format": "  ",
 	"tooltip": false,
-	"on-click": "/home/tdm/.config/rofi/launchers/misc/launcher.sh &"
+	"on-click": "~/.config/rofi/launchers/misc/launcher.sh &"
     },
     "custom/powermenu": {
 	"format": "⏻ ",
