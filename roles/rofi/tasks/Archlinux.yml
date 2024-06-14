@@ -1,0 +1,42 @@
+---
+- name: "Rofi | Download Latest Version JSON"
+  ansible.builtin.uri:
+    url: https://api.github.com/repos/davatorium/rofi/releases/latest
+  register: rofi_latest_version_json
+  changed_when: false
+
+- name: "Rofi | Registering Rofi Latest Release"
+  ansible.builtin.set_fact:
+    rofi_latest_release: "{{ rofi_latest_version_json.json.tag_name }}"
+
+- name: "Rofi | Registering Rofi Latest Version"
+  ansible.builtin.set_fact:
+    rofi_latest_version: "{{ rofi_latest_release.stdout | default('') }}"
+
+- name: "Rofi | Getting version information"
+  ansible.builtin.command:
+    cmd: rofi -version
+  register: current_rofi_version
+  changed_when: false
+  failed_when: false
+
+- name: "Rofi | Edit current_rofi_version"
+  ansible.builtin.set_fact:
+    current_rofi_version: "{{ current_rofi_version.stdout.split(' ')[-1] | default('') }}"
+
+- name: "Rofi | Show current_rofi_version debug"
+  ansible.builtin.debug:
+    var: current_rofi_version
+
+- name: "Rofi | Show rofi_latest_release debug"
+  ansible.builtin.debug:
+    var: rof_latest_release
+
+- name: "Rofi | Install"
+  when: rofi_latest_release | regex_replace('^.', '') not in current_rofi_version|default('')
+  block:
+    - name: "Rofi | Install Rofi"
+      community.general.pacman:
+        name: rofi
+        state: present
+      become: true
