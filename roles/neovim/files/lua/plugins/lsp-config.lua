@@ -102,6 +102,12 @@ return {
 					},
 				})
 			end,
+			["pyright"] = function()
+				-- configure python server
+				lspconfig["pyright"].setup({
+					capabilities = capabilities,
+				})
+			end,
 		})
 	end,
 }
