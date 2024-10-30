@@ -11,7 +11,7 @@
 - name: "LSD | Configure folder"
   ansible.builtin.file:
     mode: "0755"
-    path: "{{ andible_user_dir }}/.config/lsd"
+    path: "{{ ansible_user_dir }}/.config/lsd"
     state: directory
 
 - name: "LSD | Create symlink to role files directory"
