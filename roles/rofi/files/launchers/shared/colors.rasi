@@ -1,0 +1,21 @@
+/**
+ *
+ * Author : Aditya Shakya (adi1090x)
+ * Github : @adi1090x
+ * 
+ *
+ * Modified: Vito Aligheri
+ *
+ * Colors
+ *
+ * Available Colors Schemes
+ *
+ * adapta       catppuccin      navy          paper
+ * cyberpunk    nord            tokyonight    yousai
+ * black        dracula         lovelace      onedark
+ *
+ **/
+
+/* Import color-scheme from `colors` directory */
+
+@import "~/.config/rofi/colors/onedark.rasi"
