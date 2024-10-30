@@ -13,13 +13,13 @@ theme='powermenu-style'
 host=`hostname`
 
 # Options
-shutdown='    Shutdown'
-reboot='    Reboot'
-lock='   Lock'
-suspend='    Suspend'
-logout='󰍃   Logout'
-yes='   Yes'
-no='   No'
+shutdown=''
+reboot=''
+lock=''
+suspend=''
+logout='󰍃'
+yes='󰄲'
+no=''
 
 # Rofi CMD
 rofi_cmd() {
