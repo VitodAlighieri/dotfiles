@@ -1,87 +1,92 @@
 #!/usr/bin/env bash
 
-## Author  : Aditya Shakya
-## Mail    : adi1090x@gmail.com
-## Github  : @adi1090x
-## Twitter : @adi1090x
-
-# Available Styles
-# >> Created and tested on : rofi 1.6.0-1
+## Author : Aditya Shakya (adi1090x)
+## Github : @adi1090x
 #
-# column_circle     column_square     column_rounded     column_alt
-# card_circle     card_square     card_rounded     card_alt
-# dock_circle     dock_square     dock_rounded     dock_alt
-# drop_circle     drop_square     drop_rounded     drop_alt
-# full_circle     full_square     full_rounded     full_alt
-# row_circle      row_square      row_rounded      row_alt
+## Rofi   : Power Menu
 
-theme="full_circle"
+# Current Theme
 dir="$HOME/.config/rofi/powermenu"
+theme='powermenu-style'
 
-# random colors
-styles=($(ls -p --hide="colors.rasi" $dir/styles))
-color="${styles[$(( $RANDOM % 8 ))]}"
-
-# comment this line to disable random colors
-#sed -i -e "s/@import .*/@import \"$color\"/g" $dir/styles/colors.rasi
-
-# comment these lines to disable random style
-#themes=($(ls -p --hide="powermenu.sh" --hide="styles" --hide="confirm.rasi" --hide="message.rasi" $dir))
-#theme="${themes[$(( $RANDOM % 24 ))]}"
-
-uptime=$(uptime -p | sed -e 's/up //g')
-
-rofi_command="rofi -x11 -theme $dir/full_rounded"
+# CMDs
+host=`hostname`
 
 # Options
-shutdown=""
-reboot=""
-lock=""
-suspend=""
-logout=""
+shutdown='    Shutdown'
+reboot='    Reboot'
+lock='   Lock'
+suspend='    Suspend'
+logout='󰍃   Logout'
+yes='   Yes'
+no='   No'
 
-# Confirmation
+# Rofi CMD
+rofi_cmd() {
+	rofi -dmenu \
+		-theme ${dir}/${theme}.rasi
+}
+
+# Confirmation CMD
+confirm_cmd() {
+	rofi -theme-str 'window {location: center; anchor: center; fullscreen: false; width: 250px;}' \
+		-theme-str 'mainbox {children: [ "message", "listview" ];}' \
+		-theme-str 'listview {columns: 2; lines: 1;}' \
+		-theme-str 'element-text {horizontal-align: 0.5;}' \
+		-theme-str 'textbox {horizontal-align: 0.5;}' \
+		-dmenu \
+		-p 'Confirmation' \
+		-theme ${dir}/${theme}.rasi
+}
+
+# Ask for confirmation
 confirm_exit() {
-	rofi -dmenu\
-		-i\
-		-no-fixed-num-lines\
-		-p "Are You Sure? : "\
-		-theme $dir/confirm.rasi
+	echo -e "$yes\n$no" | confirm_cmd
 }
 
-# Message
-msg() {
-	rofi -theme "$dir/message.rasi" -e "Available Options  -  yes / y / no / n"
+# Pass variables to rofi dmenu. logout variable not passed
+run_rofi() {
+	echo -e "$lock\n$suspend\n$reboot\n$shutdown" | rofi_cmd
 }
 
-# Variable passed to rofi
-options="$shutdown\n$reboot\n$lock\n$suspend\n$logout"
-
-chosen="$(echo -e "$options" | $rofi_command -p "Uptime: $uptime" -dmenu -selected-row 2)"
-case $chosen in
-    $shutdown)
+# Execute Command
+run_cmd() {
+	selected="$(confirm_exit)"
+	if [[ "$selected" == "$yes" ]]; then
+		if [[ $1 == '--shutdown' ]]; then
 			systemctl poweroff
-        ;;
-    $reboot)
+		elif [[ $1 == '--reboot' ]]; then
 			systemctl reboot
-        ;;
-    $lock)
-			betterlockscreen -l
-        ;;
-    $suspend)
+		elif [[ $1 == '--lock' ]]; then
+			hyprlock
+		elif [[ $1 == '--suspend' ]]; then
 			mpc -q pause
 			amixer set Master mute
 			systemctl suspend
+		elif [[ $1 == '--logout' ]]; then
+			loginctl terminate-user $USER
+		fi
+	else
+		exit 0
+	fi
+}
+
+# Actions
+chosen="$(run_rofi)"
+case ${chosen} in
+    $shutdown)
+		run_cmd --shutdown
+        ;;
+    $reboot)
+		run_cmd --reboot
+        ;;
+    $lock)
+		run_cmd --lock 
+        ;;
+    $suspend)
+		run_cmd --suspend
         ;;
     $logout)
-			if [[ "$DESKTOP_SESSION" == "Openbox" ]]; then
-				openbox --exit
-			elif [[ "$DESKTOP_SESSION" == "bspwm" ]]; then
-				bspc quit
-			elif [[ "$DESKTOP_SESSION" == "i3" ]]; then
-				i3-msg exit
-			elif [[ "$DESKTOP_SESSION" == "xfce" ]]; then
-				killall xfce4-session
-			fi
+		run_cmd --logout
         ;;
 esac

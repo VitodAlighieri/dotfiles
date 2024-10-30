@@ -120,6 +120,17 @@ function arch_setup() {
         _cmd "sudo pacman -S --noconfirm openssh"
     fi
 
+	# Checks fonts instalation and proceeds
+	if ! pacman -Q ttf-iosevka-nerd >/dev/null 2>&1; then
+		_task "Installing Iosevka Nerd Font"
+		_cmd "sudo pacman -S --noconfirm ttf-iosevka-nerd"
+	fi	
+
+	if ! pacman -Q ttf-jetbrains-mono-nerd >/dev/null 2>&1; then
+		_task "Installing JetBrains Mono Nerd Font"
+		_cmd "sudo pacman -S --noconfirm ttf-jetbrains-mono-nerd"
+	fi
+
     # Sets locale
     _task "Setting Locale"
     _cmd "sudo localectl set-locale LANG=en_US.UTF-8"
