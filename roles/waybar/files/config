@@ -7,7 +7,7 @@
     "height": 30,
     "spacing": 0,
     "modules-left": ["custom/launcher","hyprland/workspaces","cpu","memory"],
-    "modules-right": ["tray","network", "pulseaudio","clock","custom/powermenu"],
+    "modules-right": ["tray","network", "pulseaudio", "battery", "clock","custom/powermenu"],
 
 "hyprland/workspaces": {
 	"on-click": "activate",
@@ -74,5 +74,16 @@
 	"tooltip": false,
 	"on-click": "~/.config/rofi/powermenu/powermenu.sh &"
     },
+	"battery": {
+	"format": "{capacity}% {icon}",
+	"bat": "BAT1",
+		"interval": 60,
+	"states": {
+		"warning": 30,
+		"critical": 15
+	},
+	"format-icons": ["", "", "", "", ""],
+	"max-length": 25
+	}
 }
 
