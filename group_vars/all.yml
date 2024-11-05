@@ -36,5 +36,6 @@ default_roles:
   # - tmate
   # - tmux
   - waybar
+  - yazi
   # - zellij
   # - zoxide

@@ -1,0 +1,42 @@
+---
+- name: "Yazi | Download Latest Version JSON"
+  ansible.builtin.uri:
+    url: https://api.github.com/repos/sxyazi/yazi/releases/latest
+  register: yazi_latest_version_json
+  changed_when: false
+
+- name: "Yazi | Registering Yazi Latest Release"
+  ansible.builtin.set_fact:
+    yazi_latest_release: "{{ yazi_latest_version_json.json.tag_name }}"
+
+- name: "Yazi | Registering Yazi Latest Version"
+  ansible.builtin.set_fact:
+    yazi_latest_version: "{{ yazi_latest_release.stdout | default('') }}"
+
+- name: "Yazi | Getting version information"
+  ansible.builtin.command:
+    cmd: yazi --version
+  register: current_yazi_version
+  changed_when: false
+  failed_when: false
+
+- name: "Yazi | Edit current_yazi_version"
+  ansible.builtin.set_fact:
+    current_yazi_version: "{{ current_yazi_version.stdout.split(' ')[-1] | default('') }}"
+
+- name: "Yazi | Show current_yazi_version debug"
+  ansible.builtin.debug:
+    var: current_yazi_version
+
+- name: "Yazi | Show yazi_latest_release debug"
+  ansible.builtin.debug:
+    var: yazi_latest_release
+
+- name: "Yazi | Install"
+  when: yazi_latest_release | regex_replace('^.', '') not in current_yazi_version|default('')
+  block:
+    - name: "Yazi | Install Yazi"
+      community.general.pacman:
+        name: yazi
+        state: present
+      become: true
