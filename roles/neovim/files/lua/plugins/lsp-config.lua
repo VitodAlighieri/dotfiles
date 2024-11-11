@@ -108,6 +108,12 @@ return {
 					capabilities = capabilities,
 				})
 			end,
+			["jdtls"] = function()
+				-- configure java server
+				lspconfig["jdtls"].setup({
+					capabilities = capabilities,
+			})
+			end,
 		})
 	end,
 }

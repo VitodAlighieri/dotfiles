@@ -1,7 +1,7 @@
 return {
-	"olimorris/onedarkpro.nvim",
+	"catppuccin/nvim",
 	priority = 1000,
 	config = function()
-		vim.cmd.colorscheme("onedark")
+		vim.cmd.colorscheme("catppuccin-macchiato")
 	end,
 }
