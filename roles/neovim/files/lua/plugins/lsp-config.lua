@@ -106,13 +106,32 @@ return {
 				-- configure python server
 				lspconfig["pyright"].setup({
 					capabilities = capabilities,
+					settings = {
+						pyright = {
+							disableOrganizeImports = true,
+						},
+						python = {
+							analysis = {
+								ignore = { "*" },
+							},
+						},
+					},
 				})
 			end,
 			["jdtls"] = function()
 				-- configure java server
 				lspconfig["jdtls"].setup({
 					capabilities = capabilities,
-			})
+				})
+			end,
+			["ruff"] = function()
+				-- configure ruff server
+				lspconfig["ruff"].setup({
+					capabilities = capabilities,
+					init_options = {
+						settings = { },
+					},
+				})
 			end,
 		})
 	end,
