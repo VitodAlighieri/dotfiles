@@ -30,17 +30,17 @@ return {
 				"lua_ls",
 				"pyright",
 			},
-			automatic_installation = true,
 		})
 
 		mason_tool_installer.setup({
 			-- list of formatters/linters/debuggers for mason to install
 			ensure_installed = {
-				"ruff", -- python formatter
 				"prettier", -- prettier formatter
 				"stylua", -- lua formatter
 				"eslint_d", -- ts/js linter
 				"shfmt", -- Shell formater
+				"black",
+				"mypy",
 			},
 			run_on_start = true,
 			automatic_installation = true,

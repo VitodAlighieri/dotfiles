@@ -124,15 +124,6 @@ return {
 					capabilities = capabilities,
 				})
 			end,
-			["ruff"] = function()
-				-- configure ruff server
-				lspconfig["ruff"].setup({
-					capabilities = capabilities,
-					init_options = {
-						settings = { },
-					},
-				})
-			end,
 		})
 	end,
 }
