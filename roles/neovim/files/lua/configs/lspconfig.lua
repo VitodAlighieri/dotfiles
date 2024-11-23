@@ -11,7 +11,7 @@ lspconfig.servers = {
   "pyright",
 }
 
-local default_servers = {}
+local default_servers = { "clangd" }
 local nvlsp = require "nvchad.configs.lspconfig"
 
 -- lsps with default config
